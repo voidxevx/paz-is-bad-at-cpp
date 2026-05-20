@@ -67,3 +67,8 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+
+# Zig build tool
+zig-out/
+.zig-cache/
