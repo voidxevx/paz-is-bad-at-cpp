@@ -1,6 +1,6 @@
 #pragma once
 /*
- * Game Board 
+ * Game Board
  * Created 5/20/2026
  */
 
@@ -12,20 +12,20 @@
 
 /*
  * Game board tile state
- * 
+ *
  * None - No player has claimed this tile
  * Cross - The X player has claimed this tile
- * Crcle - The O Plater has claimed this tile
+ * Circle - The O Plater has claimed this tile
  */
-enum TileState {
-    None,
-    Cross,
-    Circle,
+enum class TileState {
+    None   = 0b000,
+    Cross  = 0b010, // Synced with Player
+    Circle = 0b011,
 };
 
 /*
- * Game Board 
- * 
+ * Game Board
+ *
  * Stores and manages board operations
  */
 class Board {

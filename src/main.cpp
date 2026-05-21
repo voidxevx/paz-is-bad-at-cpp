@@ -1,14 +1,21 @@
 #include <iostream>
+#include <memory>
 
 // INCLUDES -----
 #include "board.hpp"
+#include "playerController.hpp"
 
 int
 main() {
-    Board brd{};
+    auto board = std::make_shared<Board>();
+    PlayerController controller{board};
 
-    *brd.getTile(0, 0).value() = TileState::Circle;
+    bool res = controller.makeMove(0, 0);
+    res |= controller.makeMove(1, 1);
 
-    brd.render(std::cout);
+    if (!res)
+        std::cout << "failed\n";
+
+    board->render(std::cout);
     return 0;
 }

@@ -4,23 +4,25 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const exe = b.addExecutable(.{
-        .name = "paz=bad",
-        .root_module = b.addModule("paz=bad-core", .{
-            .optimize = optimize,
-            .target = target,
-        })
+    const mod = b.addModule("paz=bad-core", .{
+        .optimize = optimize,
+        .target = target,
+        .link_libc = true,
+        .link_libcpp = true,
     });
 
-    exe.linkLibCpp();
-    exe.linkLibC();
+    const exe = b.addExecutable(.{
+        .name = "paz=bad",
+        .root_module = mod,
+    });
 
-    exe.addCSourceFiles(.{
+    mod.addCSourceFiles(.{
         .language = .cpp,
         .files = &.{
             // Included source files
             "src/main.cpp",
-            "src/boad.cpp"
+            "src/boad.cpp",
+            "src/playerController.cpp",
         },
         .flags = &.{
             // Compiler flags
